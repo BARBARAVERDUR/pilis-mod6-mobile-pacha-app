@@ -7,7 +7,7 @@ import { COLORS, SPACING } from './src/utils/theme';
 import { CommunityScreen } from './src/screens/community/CommunityScreen';
 import { AccountScreen } from './src/screens/account/AccountScreen';
 import { Ionicons } from "@expo/vector-icons"; 
-
+import { LocationListStackScreen } from './src/screens/home/locations/LocationListStackScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,7 @@ export default function App() {
     <>
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name='Home' component={HomeScreen}/>
+        <Tab.Screen name='Home' component={LocationListStackScreen}/>
         <Tab.Screen name='Community' component={CommunityScreen}/>
         <Tab.Screen name='Account' component={AccountScreen}/>
       </Tab.Navigator>
