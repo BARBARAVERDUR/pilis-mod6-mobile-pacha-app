@@ -1,7 +1,7 @@
 import { api } from "./api";
 const SERVICE_ENDPOINT = `${api.server + api.apiVersion}/container`;
 
-export const getUsers = async () => {
+export const getContainerList = async () => {
   try {
     const response = await fetch(SERVICE_ENDPOINT);
     return response.json();
