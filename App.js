@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
-import { MainStackScreen } from "./src/screens/location-list/MainStackScreen";
+import { MainStackScreen } from "./src/screens/home/MainStackScreen"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LocationDetailScreen } from "./src/screens/location-detail/LocationDetailScreen";
-import { LocationDetailWebScreen } from "./src/screens/location-detail/LocationDetailWebScreen";
+import { LocationDetailScreen } from "./src/screens/container-detail/LocationDetailScreen";
+import { LocationDetailWebScreen } from "./src/screens/container-detail/LocationDetailWebScreen";
 import { UserProvider } from "./src/contexts/UserContext";
 
 const LocationListStack = createNativeStackNavigator();

@@ -6,7 +6,7 @@ import { getContainerList } from "../../api/container.service";
 import { getLocationLis } from "./../../api/location.service";
 import { Checkbox } from "../../components/check-box/CheckBox";
 
-export const HomeScreen = ({ navigation }, { option }) => {
+export const HomeScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [containerList, setContainerList] = useState([]);
 

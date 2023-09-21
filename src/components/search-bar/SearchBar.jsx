@@ -1,6 +1,6 @@
 import React from "react";
 import { TextInput, View } from "react-native";
-import { styles } from "./SearchBar.styles";
+import { styles } from "./SerachBar.styles"
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../utils/theme";
 
