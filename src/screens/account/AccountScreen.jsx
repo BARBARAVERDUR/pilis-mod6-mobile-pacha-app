@@ -1,9 +1,10 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { UserInfoScreen } from "../user/UserInfoScreen";
+import { LoginScreen } from "../login/LoginScreen";
 
-export const AccountScreen = () => {
-  <View >
-    <Text>Hola bb desde la account</Text>
-  </View>;
+export const ProfileScreen = () => {
+  const { currentUser } = useContext(UserContext);
 
-}
+  return <>{currentUser ? <UserInfoScreen /> : <LoginScreen />}</>;
+};
