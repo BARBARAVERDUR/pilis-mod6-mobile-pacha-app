@@ -3,8 +3,10 @@ import { Text, View, SafeAreaView, FlatList, Pressable } from "react-native";
 import { styles } from "./HomeScreen.styles";
 import { SearchBar } from "../../components/search-bar/SearchBar";
 import { getContainerList } from "../../api/container.service";
+import { getLocationLis } from "./../../api/location.service";
+import { Checkbox } from "../../components/check-box/CheckBox";
 
-export const HomeScreen = ({ navigation }) => {
+export const HomeScreen = ({ navigation }, { option }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [containerList, setContainerList] = useState([]);
 
@@ -35,15 +37,50 @@ export const HomeScreen = ({ navigation }) => {
     </Pressable>
   );
 
+  const [option, setOption] = useState([]);
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleSelectOption = (option) => {
+    setSelectedOption(option);
+  };
+
+  useEffect(() => {
+    fetch(getLocationLis)
+      .then((response) => response.json())
+      .then((data) => {
+        setOptions(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las opciones:", error);
+      });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBar handleSearch={handleSearch} searchQuery={searchQuery} />
-      <FlatList
-        data={filteredContainer}
-        renderItem={container}
-        keyExtractor={(item) => item.id}
-        style={styles.itemList}
-      />
+      <View>
+        <SearchBar handleSearch={handleSearch} searchQuery={searchQuery} />
+      </View>
+
+      <View>
+        <FlatList
+          data={filteredContainer}
+          renderItem={container}
+          keyExtractor={(item) => item.id}
+          style={styles.itemList}
+        />
+      </View>
+
+      <View>
+        {option.map((option, index) => (
+          <Checkbox
+            key={index}
+            option={option}
+            selectedOption={selectedOption}
+            onSelect={handleSelectOption}
+          />
+        ))}
+      </View>
     </SafeAreaView>
   );
 };
