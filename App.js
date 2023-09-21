@@ -1,58 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeScreen } from './src/screens/home/HomeScreen';
-import { COLORS, SPACING } from './src/utils/theme';
-import { CommunityScreen } from './src/screens/community/CommunityScreen';
-import { AccountScreen } from './src/screens/account/AccountScreen';
-import { Ionicons } from "@expo/vector-icons"; 
-import { LocationListStackScreen } from './src/screens/home/locations/LocationListStackScreen';
+import { MainStackScreen } from "./src/screens/location-list/MainStackScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { LocationDetailScreen } from "./src/screens/location-detail/LocationDetailScreen";
+import { LocationDetailWebScreen } from "./src/screens/location-detail/LocationDetailWebScreen";
+import { UserProvider } from "./src/contexts/UserContext";
 
-const Tab = createBottomTabNavigator();
-
-const TAB_ICON = {
-  Home: "home-outline",
-  Community: "earth",
-  Account: "person-outline",
-};
-
-const screenOptions = ({ route }) => {
-  const iconName = TAB_ICON [route.name]
-  return {
-    tabBarIcon : ({ size, color}) => (
-      <Ionicons name = {iconName} size = {size} color ={color} />
-    ),
-    tabBarActiveTintColor : COLORS.primary,
-    tabBarInactiveTintColor: COLORS.inactive,
-    headerShown: false,
-    tabBarStyle: styles.tabBar
-  }
-}
+const LocationListStack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <>
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name='Home' component={LocationListStackScreen}/>
-        <Tab.Screen name='Community' component={CommunityScreen}/>
-        <Tab.Screen name='Account' component={AccountScreen}/>
-      </Tab.Navigator>
-      <StatusBar style="auto" />
+      <UserProvider>
+        <NavigationContainer>
+          <LocationListStack.Navigator screenOptions={{ headerShown: false }}>
+            {/* //Pantallas con Tab */}
+            <LocationListStack.Screen name="Main" component={MainStackScreen} />
+            {/* //Pantallas sin Tab */}
+            <LocationListStack.Screen
+              name="LocationDetail"
+              component={LocationDetailScreen}
+            />
+            <LocationListStack.Screen
+              name="LocationDetailWeb"
+              component={LocationDetailWebScreen}
+            />
+          </LocationListStack.Navigator>
+        </NavigationContainer>
+      </UserProvider>
 
-    </NavigationContainer>
+      <StatusBar style="auto" />
     </>
-   
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
