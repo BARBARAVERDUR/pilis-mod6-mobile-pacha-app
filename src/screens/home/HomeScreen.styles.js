@@ -1,3 +1,5 @@
+import { StyleSheet, StatusBar, Dimensions } from "react-native";
+import { COLORS, FONT_SIZE } from "../../utils/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -5,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     marginTop: StatusBar.currentHeight,
   },
-  
+
   image: {
     width: Dimensions.get("screen").width,
     height: 300,
